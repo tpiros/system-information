@@ -10,7 +10,7 @@ $(function() {
   $('#apply').click(function() {
     var from = parseInt(new Date($('#from').val()).getTime());
     var to = parseInt(new Date($('#to').val()).getTime());
-  
+
     $.post('/api/historical', { from: from, to: to} )
     .done(function(data) {
       parseData(data, function(historicalDataArray) {
@@ -18,7 +18,9 @@ $(function() {
           title: 'System Utilisation',
           curveType: 'function',
           legend: { position: 'bottom' },
-          pointSize: 3
+          pointSize: 3,
+          width: 900,
+          height: 400
         };
 
         var historicalData = google.visualization.arrayToDataTable(
