@@ -9,7 +9,9 @@
       title: 'System Utilisation',
       curveType: 'function',
       legend: { position: 'bottom' },
-      pointSize: 3
+      pointSize: 3,
+      width: 900,
+      height: 400
     };
 
     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
