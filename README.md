@@ -5,11 +5,11 @@ This is a sample application to showcase sockets. The application collects vario
 ##Setup instructions
 
 - Clone the repository
-- npm install
-- npm install -b bower (if you don't have bower already installed)
-- bower install
+- `npm install`
+- `npm install -b bower` (if you don't have bower already installed)
+- `bower install`
 - Edit `connection.js` to reflect your MarkLogic database connection parameters
-- node app.js
+- `node app.js`
 
 ##More information
 
