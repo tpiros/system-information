@@ -47,13 +47,17 @@ let historicalRoute = (req, res) => {
   let to = req.body.to;
   db.documents.query(
     qb.where(
-      qb.range('recorded', '>=', from, '<=', to)
+      qb.and([
+        qb.range('recorded', '>=', from),
+        qb.range('recorded', '<=', to)
+      ])
     )
     .orderBy(qb.sort('recorded'))
     .slice(0,500)
   )
   .result().then((response) => {
     res.json(response);
+    console.log(response.length);
   }).catch((error) => {
     console.log(error);
   });

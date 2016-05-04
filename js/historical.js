@@ -8,8 +8,9 @@ $(function() {
   });
 
   $('#apply').click(function() {
-    var from = new Date($('#from').val()).getTime();
-    var to = new Date($('#to').val()).getTime();
+    var from = parseInt(new Date($('#from').val()).getTime());
+    var to = parseInt(new Date($('#to').val()).getTime());
+  
     $.post('/api/historical', { from: from, to: to} )
     .done(function(data) {
       parseData(data, function(historicalDataArray) {

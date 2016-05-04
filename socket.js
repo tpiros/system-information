@@ -14,7 +14,7 @@ var connect = (io, os) => {
       freeMemory = os.freemem();
       usedMemory = Number((totalMemory - freeMemory) / 1073741824).toFixed(4);
       socket.emit('resources', { cpu: load, memory: usedMemory });
-      var insertionTime = Date.now();
+      var insertionTime = parseInt(new Date().getTime());
       db.documents.write({
         uri: '/data/' + insertionTime + '.json',
         contentType: 'application/json',
@@ -24,7 +24,7 @@ var connect = (io, os) => {
       }).catch((error) => {
         console.log(error);
       });
-    }, 5000);
+    }, 10000);
   });
 }
 
