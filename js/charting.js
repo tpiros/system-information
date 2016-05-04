@@ -19,7 +19,6 @@
     chart.draw(data, options);
 
     socket.on('resources', function (load) {
-      console.log(load);
       dataArray.push([new Date(), load.cpu, load.memory]);
       data = google.visualization.arrayToDataTable(
         dataArray
