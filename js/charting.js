@@ -3,6 +3,7 @@
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart);
   var socket = io.connect('http://localhost:8080');
+  var displayed;
   function drawChart() {
     var options = {
       title: 'System Utilisation',
@@ -24,6 +25,17 @@
         dataArray
       );
       chart.draw(data, options);
+      if (displayed) {
+        $('#error').empty();
+        displayed = false;
+      }
+    });
+
+    socket.io.on('connect_error', function(error) {
+      if (!displayed) {
+        $('#error').append('<div class="alert alert-danger" role="alert">Error connecting to socket! No data is collected.</div>');
+        displayed = true;
+      }
     });
   }
 })();

@@ -7,6 +7,7 @@ const os      = require('os');
 const socket  = require('./socket').connect(io, os);
 const hbs     = require('express-handlebars');
 const router  = express.Router();
+const db      = require('./database').db();
 
 app.set('port', 8080);
 app.use('/', router);
@@ -15,27 +16,26 @@ app.use('/js', express.static(__dirname + '/js'));
 app.engine('.hbs', hbs());
 app.set('view engine', '.hbs');
 
-let osType = os.type();
-let osReleaseVersion = os.release();
-let osArch = os.arch();
-let osCPUs = os.cpus();
-let osHostname = os.hostname();
-let osTotalMemory = Number(os.totalmem() / 1073741824).toFixed(0);
+let dataObject = {
+  osType: (os.type().toLowerCase() === 'darwin') ? 'Mac OS X' : os.type(),
+  osReleaseVersion: os.release(),
+  osArch: os.arch(),
+  osCPUs: os.cpus(),
+  osHostname: os.hostname(),
+  osTotalMemory: Number(os.totalmem() / 1073741824).toFixed(0)
+};
 
-if (osType.toLowerCase() === 'darwin') {
-  osType = 'Mac OS X';
-}
+db.documents.write({
+  uri: '/data/host.json',
+  contentType: 'application/json',
+  content: dataObject
+}).result().then((response) => {
+  console.log(response.documents[0].uri + ' inserted to the database.');
+}).catch((error) => {
+  console.log(error);
+});
 
 let indexRoute = (req, res) => {
-  let dataObject = {
-    osType: osType,
-    osReleaseVersion: osReleaseVersion,
-    osArch: osArch,
-    osCPUs: osCPUs,
-    osHostname: osHostname,
-    osTotalMemory: osTotalMemory
-  };
-
   res.render(__dirname + '/index', { data: dataObject});
 };
 
