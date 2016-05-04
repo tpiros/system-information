@@ -2,21 +2,62 @@
   <head>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="/js/charting.js"></script>
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/js/charting.js"></script>
+    <script type="text/javascript" src="/js/historical.js"></script>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+     <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
   </head>
   <body>
     <div class="content">
       <div id="error"></div>
       <h1>System Information</h1>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{ data.osHostname }} - {{ data.osType }} ({{ data.osArch }}) ({{ data.osReleaseVersion }})</h3>
-        </div>
-        <div class="panel-body">
-          <p><strong>System CPU</strong>: {{ data.osCPUs.0.model }}, <strong>Total memory</strong>: {{ data.osTotalMemory }}GB</p>
-          <div id="curve_chart" style="width: 900px; height: 500px"></div>
+      <div>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#current" aria-controls="current" role="tab" data-toggle="tab">Current</a></li>
+          <li role="presentation"><a href="#historical" aria-controls="historical" role="tab" data-toggle="tab">Historical</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="current">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">{{ data.osHostname }} - {{ data.osType }} ({{ data.osArch }}) ({{ data.osReleaseVersion }})</h3>
+              </div>
+              <div class="panel-body">
+                <p><strong>System CPU</strong>: {{ data.osCPUs.0.model }}, <strong>Total memory</strong>: {{ data.osTotalMemory }}GB</p>
+                <div id="curve_chart" style="width: 900px; height: 500px"></div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="historical">
+            <div class="container">
+              <div class="col-sm-6">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <div class="input-group date" id="datetimepicker1">
+                      <input type="text" id="from" class="form-control" placeholder="YYYY-MM-DD HH:mm:ss">
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group date" id="datetimepicker2">
+                      <input type="text" id="to" class="form-control" placeholder="YYYY-MM-DD HH:mm:ss">
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-info" id="apply">Apply</button>
+                  <div id="curve_chart_historical" style="width: 900px; height: 500px"></div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

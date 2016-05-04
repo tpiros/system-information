@@ -14,10 +14,11 @@ var connect = (io, os) => {
       freeMemory = os.freemem();
       usedMemory = Number((totalMemory - freeMemory) / 1073741824).toFixed(4);
       socket.emit('resources', { cpu: load, memory: usedMemory });
+      var insertionTime = Date.now();
       db.documents.write({
-        uri: '/data/' + Date.now() + '.json',
+        uri: '/data/' + insertionTime + '.json',
         contentType: 'application/json',
-        content: { cpu: load, memory: usedMemory }
+        content: { cpu: load, memory: usedMemory, recorded: insertionTime }
       }).result().then((response) => {
         console.log(response.documents[0].uri + ' inserted to the database');
       }).catch((error) => {

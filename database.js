@@ -6,4 +6,12 @@ let connectToDb = () => {
   return db;
 }
 
-module.exports.db = connectToDb;
+let getQueryBuilder = () => {
+  const qb = marklogic.queryBuilder;
+  return qb;
+}
+
+module.exports = {
+  db: connectToDb,
+  qb: getQueryBuilder
+};
