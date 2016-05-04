@@ -13,5 +13,5 @@ This is a sample application to showcase sockets. The application collects vario
 
 ##More information
 
-[Performance monitoring using Node.js, socket.io and MarkLogic - blog post](http://www.tamas.io/performance-monitoring-using-node-js-socket-io-and-marklogic/)
-[MarkLogic and Node.js Client API - blog post](http://www.tamas.io/marklogic-and-node-js/)
+- [Performance monitoring using Node.js, socket.io and MarkLogic - blog post](http://www.tamas.io/performance-monitoring-using-node-js-socket-io-and-marklogic/)
+- [MarkLogic and Node.js Client API - blog post](http://www.tamas.io/marklogic-and-node-js/)
