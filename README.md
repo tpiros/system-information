@@ -6,7 +6,7 @@ This is a sample application to showcase sockets. The application collects vario
 
 - Clone the repository
 - `npm install`
-- `npm install -b bower` (if you don't have bower already installed)
+- `npm install -g bower` (if you don't have bower already installed)
 - `bower install`
 - Edit `connection.js` to reflect your MarkLogic database connection parameters
 - `node app.js`
